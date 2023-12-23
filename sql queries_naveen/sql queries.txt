@@ -1,0 +1,38 @@
+select firstname,lastname,salary,Dense_Rank() over(partition by location order by salary) from employee_table;
+22:39:07
+select firstname,lastname,salary,Rank() over(partition by location order by salary) from employee_table;
+22:38:15
+select firstname,lastname,salary,location,ROW_NUMBER() over (partition by location order by salary desc) from employee_table;
+22:35:59
+select firstname,lastname,salary,location,ROW_NUMBER() over (partition of location order by salary desc) from employee_table;
+22:35:42
+select * from employee_table;
+22:34:08
+select FirstName,LastName,avg(Salary) over(partition by Location) as sal_avg,count(*) over(partition by location)as loc_count from employee_table;
+22:27:28
+select FirstName,LastName,avg(Salary) as sal_avg over(partition by Location),count(*) as loc_count over(partition by location) from employee_table;
+22:25:31
+select firstname,lastname,avg(Salary) as sal_avg over(partition by Location),count(*) as loc_count over(partition by location) from employee_table;
+22:24:32
+select *,avg(Salary)over(partition by Location),count(*) over(partition by location) from employee_table;
+22:23:14
+select *,avg(salary)over(partition by location) count(location)over(partion by location) from employee_table;
+22:20:20
+select *,avg(salary)over(partition by location order by salary) from employee_table;
+22:18:12
+select *,avg(salary)over(partition by location) from employee_table;
+22:17:17
+select * from employee_table;
+22:15:47
+select location,count(location) from employee_table group by location;
+22:15:35
+INSERT INTO employee_table (FirstName, LastName, Salary, Location) VALUES ('John', 'Doe', 60000.00, 'New York'), ('Jane', 'Smith', 55000.00, 'Los Angeles'), ('Michael', 'Johnson', 70000.00, 'Chicago'), ('Emily', 'Williams', 48000.00, 'San Francisco'), ('David', 'Brown', 65000.00, 'Seattle'), ('Sarah', 'Miller', 60000.00, 'Boston'), ('Robert', 'Jones', 58000.00, 'Denver'), ('Jessica', 'Davis', 62000.00, 'Atlanta'), ('Christopher', 'Taylor', 54000.00, 'Houston'), ('Amanda', 'Anderson', 63000.00, 'Miami'), ('Brian', 'Wilson', 56000.00, 'Chicago'), -- Duplicate location ('Linda', 'White', 59000.00, 'Boston'); -- Duplicate location
+22:15:28
+select location,count(location) from employee_table group by location;
+22:14:10
+select * from employee_table;
+22:13:35
+select name,count(location) from employee_table group by location;
+22:13:22
+select * from employee_table;
+22:12:13
