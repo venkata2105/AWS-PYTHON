@@ -1,0 +1,229 @@
+-- CREATE TABLE employees (eid int(20), ename varchar(20), salary int(20));
+
+-- INSERT INTO employees (eid,ename,salary) values(1,'chinnu',340000),
+-- (2,'bunny',350000);
+
+-- select * from employees;
+-- create table smouni (sno int, name varchar(20), salary int);
+-- select * from smouni;
+-- insert into smouni(sno,name,salary) values(1,"chitti",23000),(2,"bittu",34000);
+-- update smouni set name="rrr" where sno=1;
+-- SET SQL_SAFE_UPDATES = 0;
+
+
+-- create table orders(orderid int(20),customersid int(20),orderdate int(20));
+-- select * from orders;
+
+-- use ttt;
+-- CREATE TABLE student (
+--     employee_id INT PRIMARY KEY,
+--     first_name VARCHAR(50),
+--     last_name VARCHAR(50),
+--     birth_date DATE,
+--     hire_date DATE
+-- );
+-- INSERT INTO student (employee_id, first_name, last_name, birth_date, hire_date)
+-- VALUES
+--     (1, 'John', 'Doe', '1990-01-15', '2022-03-20'),
+--     (2, 'Jane', 'Smith', '1985-05-22', '2021-11-10'),
+--     (3, 'Bob', 'Johnson', '1995-08-30', '2023-01-05');
+--     
+-- desc student
+-- create table students(id int,name varchar(20),phone int);
+-- insert into students(id,name,phone) values(1,"mouni",980);
+
+create table emp1(emp_id int,emp_name varchar(20),emp_sal int(20),emp_dept varchar(20));
+select * from emp2;
+desc emp2
+insert into emp2(emp_id,emp_name,emp_sal,emp_dept) values(1,"mouni",60000,"maths");
+select * from emp2;
+insert into emp2(emp_id,emp_name,emp_sal,emp_dept) values(2,"mahi",900,"maths");
+insert into emp2(emp_id,emp_name,emp_sal,emp_dept) values(3,"ravi",600,"che");
+insert into emp2(emp_id,emp_name,emp_sal,emp_dept) values(4,"suresh",500,"phy");
+insert into emp2(emp_id,emp_name,emp_sal,emp_dept) values(5,"gopi",800,"che");
+insert into emp2(emp_id,emp_name,emp_sal,emp_dept) values(6,"vamsi",300,"maths");
+insert into emp2(emp_id,emp_name,emp_sal,emp_dept) values(7,"ajith",200,"phy");
+insert into emp2(emp_id,emp_name,emp_sal,emp_dept) values(8,"pandu",100,"che");
+insert into emp2(emp_id,emp_name,emp_sal,emp_dept) values(9,"ramu",200,"che");
+insert into emp2(emp_id,emp_name,emp_sal,emp_dept) values(10,"siva",60000,"phy");
+select * from emp2;
+UPDATE emp2 SET emp_sal = 600 WHERE emp_sal = 60000;
+SET SQL_SAFE_UPDATES = 0;
+UPDATE emp2 SET emp_sal = 600 WHERE emp_sal = 60000;
+
+select * from emp2;
+select * from emp2 where emp_sal>100;
+select * from emp2;
+select * from emp2 where emp_sal>500;
+select * from emp2 where emp_sal<400;
+
+select * from emp2 where emp_sal<100;
+select * from emp2 where emp_sal<800;
+select * from emp2 where emp_sal<=300;
+select * from emp2 where emp_sal<=500;
+select * from emp2 where emp_sal>=500;
+select * from emp2 where emp_sal>=800;
+
+select * from emp2 where emp_sal!=600;
+select * from emp2 where emp_sal!=500;
+
+select * from emp2 where emp_sal=200;
+select * from emp2 where emp_sal=900;
+select max(salary) as max(salary) emp_dept group by from emp2 emp_dept;
+SELECT emp_dept, MAX(emp_sal) AS max_emp_sal
+FROM emp2
+GROUP BY emp_dept;
+select emp_dept,MIN(emp_sal) as min(emp_sal) FROM emp2 GROUP BY emp_dept;
+
+
+SELECT emp_dept, MIN(emp_sal) AS min_emp_sal
+FROM emp2
+GROUP BY emp_dept;
+
+CREATE TABLE employees1 (
+    employee_id INT PRIMARY KEY,
+    employee_name VARCHAR(255),
+    department_id INTemployees1em
+);
+
+select * from employees1;
+drop table employees1;
+select * from employee;
+drop table employee;
+select * from mounika;
+select * from student;
+select * from students;
+select * from employees;
+CREATE TABLE employees (
+    emp_id INT PRIMARY KEY,
+    emp_name VARCHAR(50),
+    emp_salary INT,
+    dept_id INT,
+    FOREIGN KEY (dept_id) REFERENCES departments(dept_id)
+);
+
+INSERT INTO employees VALUES (1, 'Alice', 50000, 1);
+INSERT INTO employees VALUES (2, 'Bob', 60000, 2);
+INSERT INTO employees VALUES (3, 'Charlie', 70000, 1);
+INSERT INTO employees VALUES (4, 'David', 55000, 2);
+INSERT INTO employees VALUES (5, 'Eve', 75000, 3);
+
+
+
+-------------------------------------------------
+
+
+-----------------------------------------
+sql_commands(order by,group by,having)
+-----------------------------------------
+
+
+create table employee(e_id int,e_name varchar(20),e_salary int,dept_name varchar(50));
+select * from employee;
+INSERT INTO employee (e_id, e_name, e_salary, dept_name) 
+VALUES
+  (1, 'mounika', 50000, 'IT'),
+  (2, 'chinnu', 40000, 'IT'),
+  (3, 'bindhu', 30000, 'IT'),
+  (4, 'vamsi', 20000, 'finance'),
+  (5, 'ajith', 40000, 'finance'),
+  (6, 'ravi', 50000, 'finance'),
+  (7, 'naveen', 40000, 'hr'),
+  (8, 'raju', 45000, 'hr'),
+  (9, 'ratnam', 30000, 'hr');
+  
+  
+  -- Update e_id for IT department
+UPDATE employee
+SET e_id = e_id + 100
+WHERE dept_name = 'IT';
+
+-- Update e_id for Finance department
+UPDATE employee
+SET e_id = e_id + 201
+WHERE dept_name = 'finance';
+
+-- Update e_id for HR department
+UPDATE employee
+SET e_id = e_id + 300
+WHERE dept_name = 'hr';
+
+-- Highest salary in the entire table
+SELECT e_id, e_name, dept_name,MAX(e_salary) AS highest_salary
+FROM employee
+GROUP BY dept_name, e_id, e_name;
+
+
+-- Lowest salary in the entire table
+SELECT e_id,e_name,dept_name,MIN(e_salary) AS lowest_salary
+FROM employee;
+select * from employee;
+
+select * from employee where e_salary<10000;
+select * from employee where e_salary<50000;
+select * from employee where e_salary>30000;
+select * from employee where e_salary>40000;
+select * from employee where e_salary=30000;
+select * from employee where e_salary!=40000;
+select * from employee where e_salary>=30000;
+select * from employee where e_salary>=40000;
+
+SELECT * FROM employee
+ORDER BY e_id ASC;
+
+SELECT * FROM employee
+ORDER BY e_id desc;
+
+SELECT * FROM employee
+ORDER BY e_salary DESC;
+
+SELECT * FROM employee
+ORDER BY e_salary asc;
+
+SELECT * FROM employee
+ORDER BY dept_name ASC, e_salary DESC;
+
+SELECT * FROM employee
+ORDER BY dept_name desc, e_salary asc;
+
+SELECT * FROM employee
+ORDER BY e_name DESC;
+
+SELECT * FROM employee
+ORDER BY e_name asc;
+
+-- 1.Group by dept_name and calculate the total salary in each department:
+SELECT dept_name, SUM(e_salary) AS total_salary
+FROM employee
+GROUP BY dept_name;
+
+-- 2.Group by dept_name and find the average salary in each department:
+SELECT dept_name, AVG(e_salary) AS avg_salary
+FROM employee
+GROUP BY dept_name;
+
+-- 3.Group by dept_name and find the highest salary in each department:
+SELECT dept_name, MAX(e_salary) AS highest_salary
+FROM employee
+GROUP BY dept_name;
+
+-- 4.Group by dept_name and count the number of employees in each department:
+SELECT dept_name, COUNT(*) AS num_employees
+FROM employee
+GROUP BY dept_name;
+
+-- 5.Group by dept_name and find the lowest salary in each department:
+SELECT dept_name, MIN(e_salary) AS lowest_salary
+FROM employee
+GROUP BY dept_name;
+
+-- 6.Group by e_name and find the total salary for each employee:
+SELECT e_name, SUM(e_salary) AS total_salary
+FROM employee
+GROUP BY e_name;
+
+SELECT e_name, SUM(e_salary) AS total_salary
+FROM employee
+GROUP BY employee.e_id, e_name;
+
+
