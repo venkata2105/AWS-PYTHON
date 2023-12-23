@@ -1,0 +1,132 @@
+select * from customer;
+select cust_name from customer;
+select em_id,em_name from employee;
+select * from employee where salary>40000;
+select dept_name from employee where dept_name='HR';
+
+select distinct city FROM customer;
+select distinct job_title from employees;
+select distinct purch_amt from orders;
+select distinct dept_name from department;
+select distinct city from address;
+
+select * from student where marks>450;
+select * from student where sano>103;
+select * from student where grade>'A';
+select * from address where phno>1234;
+select * from student where marks>350;
+
+select * from address where city='nlr';
+select * from student where name='mahesh';
+select * from student where grade='A';
+select * from address where city='hyd';
+select * from student where marks=500;
+
+select * from student where marks<300;
+select * from student where marks<400;
+select * from student where grade<'B';
+select * from student where id<5;
+select * from student where sano<104;
+
+select * from student where marks!=400;
+select * from student where marks!=500;
+select * from address where city!='nlr';
+select * from address where area!='kvr';
+select * from student where name!='raju';
+select * from address where phno!=1236;
+
+select * from address where area='gtn';
+select * from student where name='mahesh';
+select * from address where city='hyd';
+select * from student where grade='A';
+select * from student where id=3;
+
+select * from student where marks between 300 and 500;
+select * from student where sano between 102 and 106;
+select * from student where grade between 'A' and 'C';
+select * from student where id between 3 and 7;
+
+select * from student where name like 'r%';
+select * from student where grade like 'A%';
+select * from address where area like '%v%';
+select * from address where city like '%d';
+select * from student where grade like 'B%';
+
+select * from student order by marks;
+select * from orders order by purch_amt desc;
+select grade from student order by grade;
+select * from orders order by ord_no desc, customer_id asc;
+select dept_name from department order by dept_name desc;
+
+select * from employees where department_id=1 and salary>50000;
+select * from employee where dept_name='IT' and salary between 60000 and 70000;
+select * from student where (name='ravi'and marks=500) or (name ='teja' and grade='A');
+select * from address where city='nlr' and area='kvr';
+select * from address where city='nlr' and phno=1234 or phno=1235;
+
+select * from department where dept_name='IT' or location='up';
+select * from customer where cust_name like 'B%' or cust_name like '%n';
+select * from customer where city='London' or salesmen_id=5002;
+select * from orders where customer_id=3005 or purch_amt>1500.00;
+select * from student where marks>400 or grade='C';
+
+select * from address where not (city='nlr');
+select area from address where not area='kphb';
+select * from student where not grade='A';
+select * from employee where not em_name like 'J%';
+select salary from employee where not salary between 60000 and 70000;
+
+update employee set salary=55500 where salary=55000;
+update student set marks=350 where name='raju';
+update customer set grade=300 where city='New York' and grade=100;
+update customer set grade=200 where customer_id=3001;
+update address set phno=9874 where city='gnt';
+
+select * from student inner join address on student.sano=address.sano;
+select * from student right join address on student.sano=address.sano;
+select * from student left join address on student.sano=address.sano;
+
+select * from student cross join address;
+select * from salesmen cross join orders;
+select * from salesmen cross join orders where city='Paris';
+select * from orders cross join customer;
+select em_name,salary from employee cross join department;
+	
+
+select * from student inner join address on student.sano=address.sano where address.sano=105;
+select * from student inner join address on student.sano=address.sano where name='ravi';
+select * from student inner join address on student.sano=address.sano where id=2;
+select * from student inner join address on student.sano=address.sano where grade='A';
+
+select * from student left join address on student.sano=address.sano where marks=400;
+select * from student left join address on student.sano=address.sano where marks>300;
+select * from student left join address on student.sano=address.sano where city='nlr';
+select * from student left join address on student.sano=address.sano where name='gopi';
+
+select * from student right join address on student.sano=address.sano where address.sano=108;
+select * from orders right join salesmen on orders.salesmen_id=salesmen.salesmen_id where city='Paris';
+select * from orders right join salesmen on orders.salesmen_id=salesmen.salesmen_id where purch_amt<1500;
+select ord_no,sum(purch_amt) as sum_amt from orders right join salesmen on orders.salesmen_id=salesmen.salesmen_id
+  group by ord_no;
+
+select purch_amt from orders FULL JOIN salesmen on orders.salesmen_id=salesmen.salesmen_id;
+select name,marks from student full join address on student.sano=address.sano;
+select * from customer full join orders on customer.customer_id=orders.customer_id;
+select em_name from employee full join department on employee.dept_name=department.dept_name;
+select name,grade from student full join address on address.sano=student.sano;
+
+select t1.name from student t1 inner join student t2 on t1.sano=t2.sano;
+
+select count(*) as total_orders from orders;
+select count(*) as salesmen_is from orders where salesmen_id=5001; 
+select count(distinct customer_id) as unique_cust from orders;
+select customer_id, count(*) as order_count from orders group by customer_id;
+select count(purch_amt) as priced_product from orders; 
+
+select * from employee where salary > (select avg(salary) from employee);
+select * from employee e join (select avg(salary) sal from employee) avg_sal on e.salary>avg_sal.sal;
+select dept_name, max(salary) from employee group by dept_name;
+select * from employee where (dept_name,salary) in (select dept_name, max(salary) from employee group by dept_name);
+select * from department where dept_name not in (select  distinct dept_name from employee);
+select * from employee e1 where salary > (select avg(salary) from employee e2 where e2.dept_name = e1.dept_name);
+select * from department d where not exists ( select 1 from employee e where e.dept_name=d.dept_name);
