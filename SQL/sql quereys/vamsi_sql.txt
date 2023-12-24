@@ -121,7 +121,33 @@ select count(*) as total_orders from orders;
 select count(*) as salesmen_is from orders where salesmen_id=5001; 
 select count(distinct customer_id) as unique_cust from orders;
 select customer_id, count(*) as order_count from orders group by customer_id;
-select count(purch_amt) as priced_product from orders; 
+select count(purch_amt) as priced_product from orders;
+
+select sum(marks) as total_marks from student;
+select sum(commission) as total_cm from salesmen;
+select ord_no,sum(purch_amt) as total_amt from orders group by ord_no;
+select sum(purch_amt) as total from orders where salesmen_id=5001;
+select em_name,sum(salary) as total_sal from employee group by em_name having sum(salary)>60000; 
+
+select avg(marks) as avg_marks from student;
+select avg(commission) as avg_cm from salesmen;
+select ord_no,avg(purch_amt) as avg_amt from orders group by ord_no;
+select avg(purch_amt) as avg_amt from orders where salesmen_id=5001;
+select em_name,avg(salary) as avg_sal from employee group by em_name having avg(salary)>60000;
+
+select min(marks) as min_marks from student;
+select min(commission) as min_cm from salesmen;
+select ord_no,min(purch_amt) as min_amt from orders group by ord_no;
+select min(purch_amt) as min_amt from orders where salesmen_id=5001;
+SELECT Min(salary) AS min_sal FROM (SELECT salary FROM employee WHERE dept_name='IT') as min_sal;
+
+
+select max(marks) as max_marks from student;
+select max(commission) as max_cm from salesmen;
+select ord_no,max(purch_amt) as max_amt from orders group by ord_no;
+select max(purch_amt) as max_amt from orders where salesmen_id=5001;
+SELECT Max(salary) AS max_sal FROM (SELECT salary FROM employee WHERE dept_name='IT') as max_sal;
+
 
 select * from employee where salary > (select avg(salary) from employee);
 select * from employee e join (select avg(salary) sal from employee) avg_sal on e.salary>avg_sal.sal;
